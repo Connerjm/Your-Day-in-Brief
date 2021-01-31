@@ -1,13 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="https://developers.google.com/speed/libraries#jquery">
     <title>Your Day in Brief</title>
+    <link rel="stylesheet" href="Styles\style.css">
 </head>
+
 <body>
-    
-    <h1>Hello World!</h1>
+    <div class="container">
+        <section class="hero is-small">
+            <!-- Hero head: will stick at the top -->
+            <div class="hero-head">
+                <div class="container has-text-centered">
+                    <img src="Assets\Your_News_in_Brief.png" id="Logo" width="20%" height="20%">
+                </div>
+            </div>
+            <!-- Hero content: will be in the middle -->
+            <div class="hero-body">
+                <div class="container has-text-centered">
+                    <p class="title">
+                        Your day in brief!
+                    </p>
+                    <p class="subtitle">
+                        We hope you have a great day.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <div class="container">
+            <div class="box" id="tab-box">
+                <div class="tabs is-boxed">
+                    <ul>
+                        <li class="is-active"><a>Pictures</a></li>
+                        <li><a>Local News</a></li>
+                        <li><a>Politics</a></li>
+                        <li><a>Sports</a></li>
+                        <li><a>World News</a></li>
+                        <li><a>Finance</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <section>
+            <div class="container">
+
+            </div>
+        </section>
 
 </body>
+
 </html>
+<script src="Scripts\script.js"></script>
