@@ -1,10 +1,20 @@
 body {
-    background: #362b2b;
+    background: #ccffff;
 }
 .box
 {
+    background-color: #5c345d;
 }
 
 #tab-box {
     width: min-content;
+}
+
+.title {
+    color: 0;
+}
+
+p {
+    color: white;
+    font-size: larger;
 }
