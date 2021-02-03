@@ -35,3 +35,12 @@ This application will allow users to access the latest news and weather for the 
 - [Deployment](https://connerjm.github.io/Your-Day-in-Brief/)
 
 ## Images
+
+## Notes
+
+### Conventions We Should Follow-
+
+css classes and ids - lowercase-with-hyphens
+constants - ALL_UPPER_WITH_UNDERSCORE
+variables - camelCase
+functions - PascalCase
