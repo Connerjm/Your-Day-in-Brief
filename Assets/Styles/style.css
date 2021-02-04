@@ -1,20 +1,53 @@
+/* Application */
+
 body {
-    background: #ccffff;
+    background-color: #CAFFFB;
 }
-.box
+
+/* Header */
+
+header {
+    background-color: #805B87;
+}
+
+header, header .title, header .subtitle, header .site-icon img {
+    color: #CAFFFB;
+}
+
+.date-time p {
+    font-size: x-large;
+}
+
+.site-icon img {
+    border: solid 1px #363636;
+    border-radius: 10px;
+    height: 105px;
+    background-color: #CAFFFB;
+}
+
+/* News */
+
+/* Weather */
+
+
+
+/*----Commented this stuff out to make it cleaner while I was futzing with stuff----*/
+
+/* .column
+{
+    border: solid 1px red;
+} */
+
+/* .box
 {
     background-color: #5c345d;
-}
+} */
 
-#tab-box {
+/* #tab-box {
     width: min-content;
-}
+} */
 
-.title {
-    color: 0;
-}
-
-p {
-    color: white;
+/* p {
+    /* color: white;
     font-size: larger;
-}
+} */

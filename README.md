@@ -40,12 +40,12 @@ This application will allow users to access the latest news and weather for the 
 
 ### Conventions We Should Follow-
 
-css classes and ids - lowercase-with-hyphens
-constants - ALL_UPPER_WITH_UNDERSCORE
-variables - camelCase
-functions - PascalCase
+- css classes and ids - lowercase-with-hyphens
+- constants - ALL_UPPER_WITH_UNDERSCORE
+- variables - camelCase
+- functions - PascalCase
 
 ### Versions-
 
-Bulma 0.9.1
-jQuery 3.5.1
+- Bulma 0.9.1
+- jQuery 3.5.1

@@ -12,119 +12,68 @@
 
     <!-- Title. -->
     <title>Your Day in Brief</title>
-    <link rel="stylesheet" href="Assets/Styles/style.css">
 </head>
 
 <body>
-    <div class="container">
-        <section class="hero is-small">
-            <!-- Hero head: will stick at the top -->
-            <div class="hero-head">
-                <div class="container has-text-centered">
-                    <img src="Assets/Your_News_in_Brief.png" alt="Icon displaying a pair of briefs with a newspaper."
-                        id="Logo" style="width:20%; height:20%" />
-                </div>
+    <!-- Header with time, title, and icon. -->
+    <header class="hero is-small">
+        <div class="hero-body columns">
+            <div class="date-time column is-one-fifth">
+                <p class="date">02/03/2021</p>
+                <p class="time">17:31</p>
             </div>
-            <!-- Hero content: will be in the middle -->
-            <div class="hero-body">
-                <div class="container has-text-centered">
-                    <p class="title">
-                        Your day in brief!
-                    </p>
-                    <p class="subtitle">
-                        We hope you have a great day.
-                    </p>
-                </div>
+            <div class="welcome-title has-text-centered column">
+                <p class="title is-1">Your Day in Brief</p>
+                <p class="subtitle is-3">an introduction to your day.</p>
             </div>
-        </section>
-        <div class="container">
-            <div class="box" id="tab-box">
-                <div class="tabs is-boxed">
-                    <ul>
-                        <li class="is-active"><a>Recent News</a></li>
-                        <li><a>Local News</a></li>
-                        <li><a>Politics</a></li>
-                        <li><a>Sports</a></li>
-                        <li><a>World News</a></li>
-                        <li><a>Finance</a></li>
-                    </ul>
+            <div class="site-icon has-text-centered column is-one-fifth">
+                <img src="Assets/Images/Your_News_in_Brief.png" alt="Your News in Brief Icon">
+            </div>
+        </div>
+    </header>
+
+    <!-- News category tabs. -->
+    <div class="tabs is-boxed is-centered">
+        <ul>
+            <li class="is-active"><a>Recent News</a></li>
+            <li><a>Local News</a></li>
+            <li><a>World News</a></li>
+            <li><a>Politics</a></li>
+            <li><a>Sports</a></li>
+            <li><a>Finance</a></li>
+        </ul>
+    </div>
+
+    <!-- Main page content. News on the left, weather on the right. -->
+    <main class="columns" id="main-container">
+        <!--News Column-->
+        <div class="column is-8" id="news-container">
+            <div class="news-card columns">
+                <img class="news-image column is-5" src="Assets/Images/placeholder.png" alt="Image from the article.">
+                <div class="news-card-info column is-7">
+                    <h2 class="headline">"This is a sample headline, more at 5 tonight"</h2>
+                    <p class="author">Charles Fakeman</p>
+                    <p class="publish-date">02/02/2021</p>
+                    <a href="#">linktoarticle.com</a>
                 </div>
             </div>
         </div>
-        <section>
-            <div class="columns" id="newsContainer">
-                <!--News Column-->
-                <div class="column is-8">
-                    <div class="columns box">
-                        <div class="column"><img src="Assets\placeholder.png">
-                        </div>
-                        <div class="column">
-                            <h2 class="headline">Headline</h2>
-                            <p class="author">Charles</p>
-                            <p class="publish-date">02/02/2021</p>
-                            <a href="#">Link to article</a>
-                        </div>
-                    </div>
-                    <div class="columns box">
-                        <div class="column"><img src="Assets\placeholder.png">
-                        </div>
-                        <div class="column">
-                            <h2 class="headline">Headline</h2>
-                            <p class="author">Charles</p>
-                            <p class="publish-date">02/02/2021</p>
-                            <a href="#">Link to article</a>
-                        </div>
-                    </div>
-                    <div class="columns box">
-                        <div class="column"><img src="Assets\placeholder.png">
-                        </div>
-                        <div class="column">
-                            <h2 class="headline">Headline</h2>
-                            <p class="author">Charles</p>
-                            <p class="publish-date">02/02/2021</p>
-                            <a href="#">Link to article</a>
-                        </div>
-                    </div>
-                    <div class="columns box">
-                        <div class="column"><img src="Assets\placeholder.png">
-                        </div>
-                        <div class="column">
-                            <h2 class="headline">Headline</h2>
-                            <p class="author">Charles</p>
-                            <p class="publish-date">02/02/2021</p>
-                            <a href="#">Link to article</a>
-                        </div>
-                    </div>
-                    <div class="columns box">
-                        <div class="column"><img src="Assets\placeholder.png">
-                        </div>
-                        <div class="column">
-                            <h2 class="headline">Headline</h2>
-                            <p class="author">Charles</p>
-                            <p class="publish-date">02/02/2021</p>
-                            <a href="#">Link to article</a>
-                        </div>
-                    </div>
+        <!--Weather Column-->
+        <div class="column is-4" id="weather-container">
+            <div class="weather-card columns">
+                <img class="weather-icon column is-5" src="https://via.placeholder.com/50" alt="Icon of the weather">
+                <div class="weather-card-info column is-7">
+                    <h2 class="date">02/03/2021</h2>
+                    <p class="temp">Temperature 68F</p>
+                    <p class="humidity">Humidity 42%</p>
+                    <p class="desciption">Expect light rain today.</p>
                 </div>
             </div>
-            <!--Weather Column-->
-            <div class="columns is-4" id="weatherContainer"></div>
-            <div class="column">
-                <div class="column">
-                    <div class="column-image"></div>
-                    <div class="column-content">I can put whatever I want in here as long as it makes
-                        sedendasjkldasd
-                    </div>
-                </div>
-            </div>
-    </div>
-    </div>
-    </section>
+        </div>
+    </main>
 
     <!-- Script Links. -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="Assets/Scripts/script.js"></script>
 </body>
-<script src="Scripts\script.js"></script>
-
 </html>
