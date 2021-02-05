@@ -1,17 +1,27 @@
 $(document).ready(function ()//Encouraged when using jQuery.
 {
-/* DOM Elements */
+    /* DOM Elements */
 
-/* Variables */
+    /* Variables */
 
-/* Primary Functions */
+    /* Primary Functions */
 
-/* Helper Functions */
+    /* Helper Functions */
 
-/* Attaching Listeners */
+    /* Attaching Listeners */
+    $(document).ready(function () {
+        $('#tabs li').on('click', function () {
+            var tab = $(this).data('tabs');
 
-/* Function Calls */
+            $('#tabs li').removeClass('is-active');
+            $(this).addClass('is-active');
 
-/* Testing */
+            $('#tab-content p').removeClass('is-active');
+            $('p[data-content="' + tab + '"]').addClass('is-active');
+        });
+    });
+    /* Function Calls */
+
+    /* Testing */
 
 });
