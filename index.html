@@ -32,15 +32,16 @@
         </div>
     </header>
 
-    <!-- News category tabs. -->
-    <div class="tabs is-boxed is-centered">
+    <!-- News category tabs.
+    If we change the data-tab to something else be sure to change it in script as well -JW -->
+    <div class="tabs is-boxed is-centered" id="tabs">
         <ul>
-            <li class="is-active"><a>Recent News</a></li>
-            <li><a>Local News</a></li>
-            <li><a>World News</a></li>
-            <li><a>Politics</a></li>
-            <li><a id="sportNews">Sports</a></li>
-            <li><a>Finance</a></li>
+            <li class="is-active" data-tab="1"><a>Recent News</a></li>
+            <li data-tab="2"><a>Local News</a></li>
+            <li data-tab="3"><a>World News</a></li>
+            <li data-tab="4"><a>Politics</a></li>
+            <li data-tab="5"><a id="sportNews">Sports</a></li>
+            <li data-tab="6"><a>Finance</a></li>
         </ul>
     </div>
 
@@ -87,4 +88,5 @@
     <script src="https://moment.github.io/luxon/global/luxon.min.js"></script>
     <script src="Assets/Scripts/script.js"></script>
 </body>
+
 </html>
