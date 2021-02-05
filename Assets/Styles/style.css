@@ -1,20 +1,64 @@
+/* Application */
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 body {
-    background: #ccffff;
-}
-.box
-{
-    background-color: #5c345d;
+    background-color: #CAFFFB;
 }
 
-#tab-box {
-    width: min-content;
+/* Header */
+
+header {
+    background-color: #805B87;
 }
 
-.title {
-    color: 0;
+header, header .title, header .subtitle, header .site-icon img {
+    color: #CAFFFB;
 }
 
-p {
-    color: white;
-    font-size: larger;
+.date-time p {
+    font-size: x-large;
 }
+
+header .title, header .subtitle {
+    text-shadow: 2px 2px #014182;
+}
+
+.site-icon img {
+    border: solid 1px #363636;
+    border-radius: 10px;
+    height: 105px;
+    background-color: #CAFFFB;
+}
+
+/* Main container */
+
+#news-container, #weather-container {
+    margin: 0px 10px;
+    border: solid 2px #014182;
+    border-radius: 5px;
+}
+
+hr {
+    border-top: solid 1px #014182;
+}
+
+.news-card, .weather-card {
+    margin: 5px;
+    border: solid 1px #014182;
+    border-radius: 5px;
+    background-color: #805B87;
+    color: #CAFFFB;
+}
+
+/* News */
+
+.link {
+    color: #014182;
+}
+
+/* Weather */
