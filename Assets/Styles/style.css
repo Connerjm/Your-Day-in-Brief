@@ -43,6 +43,14 @@ header .title, header .subtitle {
     border-radius: 5px;
 }
 
+#tab-content p {
+    display: none;
+  }
+
+  #tab-content p.is-active {
+    display: block;
+  }
+
 hr {
     border-top: solid 1px #014182;
 }
