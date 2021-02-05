@@ -1,33 +1,55 @@
 $(document).ready(function ()//Encouraged when using jQuery.
 {
-    /* DOM Elements */
+/* DOM Elements */
 
-    /* Variables */
+var timeElement = $(".time");
+var dateElement = $(".date");
 
-    var myNewsKey = " CzIM-gTtsxsW3J-21VNj8tbfTayZHee6Pzz2XmuSM_oqHx1L";
+/* Variables */
 
-    var myNewsApiKey = "e18cb147025a40b0998d74f3b954fd4d";
+var dateTime = luxon.DateTime.local();//Gets the luxon DateTime object.
+var date = dateTime.toFormat("yyyy'-'LL'-'dd");//Custom formatting to put in the request url.
 
+// fetch('http://api.mediastack.com/v1/news?language=en&access_key=de49fa1cabbba1c8b04d87008d800e06&countries=us&date=2021-02-04&&sources=sports')
+// .then(response => response.json())
+// .then(data =>
+// {
+//     console.log(data)
 
+//     $("#sportNews").click(function ()
+//     {
+//         console.log("clicked");
+//         $(".headline").html(data.data[0].description)
+//         $(".publish-date").html((data.data[0].published_at).slice(0, 10));
+//         $(".author").html(data.data[0].author)
+//         $(".link").attr("href", "https://sports.yahoo.com/british-boxers-restart-olympic-preparations-124711072.html?src=rss")
+//         $(".news-image").attr("src", "https://lh3.googleusercontent.com/proxy/UsLknsEkc-nha6DEV2jS39evfDxHU3FDFjgz6GO9teVykedivtplIkf5WCxTSvNWMYnjxARj26Y3gyEAk233-oAYlNkjvwWEuJeZIr3deWw5pv1-CuSo");
+//     }
+// );
 
+/* Primary Functions */
 
-const API_KEY = "3776e9b2d753f50d011ad9eff0319013";
-var date;
+function initialize()
+{
+    timeElement.text(dateTime.toLocaleString(luxon.DateTime.TIME_SIMPLE));
+    dateElement.text(dateTime.toLocaleString(luxon.DateTime.DATE_HUGE));
+}
 
+/* Helper Functions */
 
 function general() {
     //calls for general *Default*
-    var requesturl = 'http://api.mediastack.com/v1/news?languages=en&sources=general&access_key=cd39f68da5d87fa40deb5baf33377368&date=' + date;
+    var requesturl = 'http://api.mediastack.com/v1/news?languages=en&access_key=cd39f68da5d87fa40deb5baf33377368';
     $.ajax({
         url: requesturl,
         type: "GET",
         success: function(response)
         {
-            console.log('general data: ' + response);
+            console.log(requesturl);
+            console.log(response);
         }
     });
 }
-general();
 
 function business() {
     //calls for businesss
@@ -41,7 +63,6 @@ function business() {
         }
     });
 }
-business();
 
 function entertainment() {
     //calls for entertainment
@@ -55,7 +76,6 @@ function entertainment() {
         }
     });
 }
-entertainment();
 
 function technology() {
     //calls for technology
@@ -69,7 +89,6 @@ function technology() {
         }
     });    
 }
-technology();
 
 function science() {
     //calls for science
@@ -83,65 +102,28 @@ function science() {
         }
     });    
 }
-science();
 
+/* Attaching Listeners */
+$(document).ready(function ()
+{
+    $('#tabs li').on('click', function ()
+    {
+        var tabs = $(this).data('tabs');
+        $('#tabs li').removeClass('is-active');
+        $(this).addClass('is-active');
+    });
+});
+
+/* Function Calls */
+
+initialize();
 
 /* Testing */
 
-    fetch('http://api.mediastack.com/v1/news?language=en&access_key=de49fa1cabbba1c8b04d87008d800e06&countries=us&date=2021-02-04&&sources=sports')
-        .then(response => response.json())
-        .then(data => {
+general();
+business();
+entertainment();
+technology();
+science();
 
-            console.log(data)
-
-            $("#sportNews").click(function () {
-                console.log("clicked");
-                $(".headline").html(data.data[0].description)
-                $(".publish-date").html((data.data[0].published_at).slice(0, 10));
-                $(".author").html(data.data[0].author)
-                $(".link").attr("href", "https://sports.yahoo.com/british-boxers-restart-olympic-preparations-124711072.html?src=rss")
-                $(".news-image").attr("src", "https://lh3.googleusercontent.com/proxy/UsLknsEkc-nha6DEV2jS39evfDxHU3FDFjgz6GO9teVykedivtplIkf5WCxTSvNWMYnjxARj26Y3gyEAk233-oAYlNkjvwWEuJeZIr3deWw5pv1-CuSo")
-
-
-            })
-
-
-
-
-
-        });
-
-
-
-
-    //   & sources = cnn,bbc
-    //   & categories = business,sports
-    //   & countries = us,au
-    //   & languages = en,-de
-    //   & keywords = virus,-corona
-    //   & date = 2020-02-19
-    //   & sort = published_desc
-    //   & offset = 0
-    //   & limit = 100
-    // de49fa1cabbba1c8b04d87008d800e06&countries=us
-
-
-
-    /* Primary Functions */
-
-    /* Helper Functions */
-
-    /* Attaching Listeners */
-    $(document).ready(function () {
-        $('#tabs li').on('click', function () {
-            var tabs = $(this).data('tabs');
-
-            $('#tabs li').removeClass('is-active');
-            $(this).addClass('is-active');
-        });
-    });
-    /* Function Calls */
-
-    /* Testing */
-
-});               
+});
