@@ -11,6 +11,7 @@ var dateTime = luxon.DateTime.local();//Gets the luxon DateTime object.
 var date = dateTime.toFormat("yyyy'-'LL'-'dd");//Custom formatting to put in the request url.
 
 var myNewsKey = " CzIM-gTtsxsW3J-21VNj8tbfTayZHee6Pzz2XmuSM_oqHx1L";
+
 var myNewsApiKey = "e18cb147025a40b0998d74f3b954fd4d";
 
 fetch('http://api.mediastack.com/v1/news?language=en&access_key=de49fa1cabbba1c8b04d87008d800e06&countries=us&date=2021-02-04&&sources=sports')
