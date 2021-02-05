@@ -24,9 +24,11 @@ This application will allow users to access the latest news and weather for the 
 
 - HTML
 - CSS
-  - Bulma
+  - Bulma 0.9.1
 - JavaScript
-  - Currents API
+  - jQuery 3.5.1
+  - ~~Currents API~~
+  - Mediastack API
   - Open Weather API
 
 ## Launch
