@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="is-clipped">
+
 
 <head>
     <!-- Meta information. -->
@@ -15,6 +16,37 @@
 </head>
 
 <body>
+     <!-- Creating a modal for the popup. -->
+     <div id="modal" class="modal is-active">
+         <div class="modal-background"></div>
+        <!-- Inner content for the popup. -->
+        <div class="modal-content">
+          <header class="modal-card-head"><h2>User Information</h2></header>
+          <hr>
+          <form>
+            <!-- collect name -->
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name">
+            <br>
+            <!-- collect zip code -->
+            <label for="lowercase">Zip Code</label>
+            <input type="text" id="zipCode" name="zipCode">
+            <br>
+            <!--toggle for social media-->
+            <!-- <input type="checkbox" id="uppercase" name="uppercase" value="Upper Case">
+            <label for="uppercase">Upper Case</label>
+            <br> -->
+            
+          </form>
+          <br>
+          <hr>
+          <footer class="modal-card-foot">
+            <button id="cancel" class="button">Cancel</button>
+            <button id="submit" class="button is-success">Submit</button>
+          </footer>
+        </div>
+      </div>
+
     <!-- Header with time, title, and icon. -->
     <header class="hero is-small">
         <div class="hero-body columns">

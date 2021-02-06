@@ -1,17 +1,23 @@
 $(document).ready(function ()//Encouraged when using jQuery.
-{
+{ 
+//$("#modal").modal('show');
+
 /* DOM Elements */
 
 var timeElement = $(".time");
 var dateElement = $(".date");
 
+
 /* Variables */
 
 //const API_KEY = "cd39f68da5d87fa40deb5baf33377368";//Replace API key here if it expires.
 const API_KEY = "4b505f48bed1120432d9b47c6c779234";
+const weather_KEY = "e3171896dd984662b81687f80e4b2acd";
 
 var dateTime = luxon.DateTime.local();//Gets the luxon DateTime object.
 var date = dateTime.toFormat("yyyy'-'LL'-'dd");//Custom formatting to put in the request url.
+
+var userInfoObj = {};
 
 /* Primary Functions */
 
@@ -21,6 +27,27 @@ function Initialize()
     //Sets the date and time elements in the header/hero.
     timeElement.text(dateTime.toLocaleString(luxon.DateTime.TIME_SIMPLE));
     dateElement.text(dateTime.toLocaleString(luxon.DateTime.DATE_HUGE));
+
+
+    $('#modal').css('display', 'block');
+    var nameEl = $('#name').val();
+    var zipCodeEl = $('#zipCode').val();
+
+    
+}
+// Close the popup.
+function close()
+{
+  $('#modal').css('display', 'none');
+}
+
+//click anywhere to close modal
+window.onclick = function (event)
+{
+  if (event.target == modal)
+  {
+    close();
+  }
 }
 
 /* Helper Functions */
@@ -54,6 +81,13 @@ function APICalls(category)
         }
     });
 }
+
+function APIWeatherCalls() 
+{
+    var requesturl = `https://api.openweathermap.org/data/2.5/weather?q=${zipcode}&appid=${weather_KEY}`
+    
+}
+ 
 
 
 
