@@ -36,6 +36,9 @@ header .title, header .subtitle {
 }
 
 /* Main container */
+.modal-card-foot, .modal-card-head {
+    background-color: #57a9a987;
+}
 
 #news-container, #weather-container {
     margin: 0px 10px;
