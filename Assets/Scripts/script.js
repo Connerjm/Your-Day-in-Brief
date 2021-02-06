@@ -7,7 +7,8 @@ var dateElement = $(".date");
 
 /* Variables */
 
-const API_KEY = "cd39f68da5d87fa40deb5baf33377368";//Replace API key here if it expires.
+//const API_KEY = "cd39f68da5d87fa40deb5baf33377368";//Replace API key here if it expires.
+const API_KEY = "4b505f48bed1120432d9b47c6c779234";
 
 var dateTime = luxon.DateTime.local();//Gets the luxon DateTime object.
 var date = dateTime.toFormat("yyyy'-'LL'-'dd");//Custom formatting to put in the request url.
@@ -28,7 +29,8 @@ function Initialize()
 //general, business, entertainment, health, science, sports, and technology.
 function APICalls(category)
 {
-    var requesturl = `http://api.mediastack.com/v1/news?access_key=${API_KEY}&languages=en&sources=${category}&date=${date}`;//For now, using the category makes the api return an empty data array. idk why.
+    var requesturl = `https://gnews.io/api/v4/top-headlines?token=${API_KEY}&lang=en&topic=${category}`;
+   
     $.ajax({
         url: requesturl,
         type: "GET",
@@ -37,6 +39,13 @@ function APICalls(category)
             //Do something with the response data.
             console.log(requesturl);
             console.log(response);
+            
+            //Responses called when category tabs are clicked
+            $(".headline").html(response.articles[0].content);
+            $(".publish-date").html((response.articles[0].publishedAt).slice(0, 10));
+            $(".link").attr("href", response.articles[0].url).html(response.articles[0].source.name);
+            $(".news-image").attr("src", response.articles[0].image, "alt", "News Image");
+            
         },
         error: function(errorinfo)
         {
@@ -45,6 +54,12 @@ function APICalls(category)
         }
     });
 }
+
+
+
+
+
+
 
 // fetch('http://api.mediastack.com/v1/news?language=en&access_key=de49fa1cabbba1c8b04d87008d800e06&countries=us&date=2021-02-04&&sources=sports')
 // .then(response => response.json())
@@ -67,7 +82,8 @@ function APICalls(category)
 
 $('#tabs li').on('click', function ()
 {
-    var tabs = $(this).data('tabs');
+    APICalls($(this).data('tab'));
+    
     $('#tabs li').removeClass('is-active');
     $(this).addClass('is-active');
 });
@@ -81,3 +97,5 @@ Initialize();
 APICalls("entertainment");
 
 });
+
+/////
