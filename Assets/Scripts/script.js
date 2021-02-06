@@ -7,8 +7,44 @@ var dateElement = $(".date");
 
 /* Variables */
 
+const API_KEY = "cd39f68da5d87fa40deb5baf33377368";//Replace API key here if it expires.
+
 var dateTime = luxon.DateTime.local();//Gets the luxon DateTime object.
 var date = dateTime.toFormat("yyyy'-'LL'-'dd");//Custom formatting to put in the request url.
+
+/* Primary Functions */
+
+//Called when the application is opened.
+function Initialize()
+{
+    //Sets the date and time elements in the header/hero.
+    timeElement.text(dateTime.toLocaleString(luxon.DateTime.TIME_SIMPLE));
+    dateElement.text(dateTime.toLocaleString(luxon.DateTime.DATE_HUGE));
+}
+
+/* Helper Functions */
+
+//API calls for the given category.
+//general, business, entertainment, health, science, sports, and technology.
+function APICalls(category)
+{
+    var requesturl = `http://api.mediastack.com/v1/news?access_key=${API_KEY}&languages=en&sources=${category}&date=${date}`;//For now, using the category makes the api return an empty data array. idk why.
+    $.ajax({
+        url: requesturl,
+        type: "GET",
+        success: function(response)
+        {
+            //Do something with the response data.
+            console.log(requesturl);
+            console.log(response);
+        },
+        error: function(errorinfo)
+        {
+            alert("Whoopsies. Something went wrong.");
+            console.log(errorinfo);
+        }
+    });
+}
 
 // fetch('http://api.mediastack.com/v1/news?language=en&access_key=de49fa1cabbba1c8b04d87008d800e06&countries=us&date=2021-02-04&&sources=sports')
 // .then(response => response.json())
@@ -25,105 +61,23 @@ var date = dateTime.toFormat("yyyy'-'LL'-'dd");//Custom formatting to put in the
 //         $(".link").attr("href", "https://sports.yahoo.com/british-boxers-restart-olympic-preparations-124711072.html?src=rss")
 //         $(".news-image").attr("src", "https://lh3.googleusercontent.com/proxy/UsLknsEkc-nha6DEV2jS39evfDxHU3FDFjgz6GO9teVykedivtplIkf5WCxTSvNWMYnjxARj26Y3gyEAk233-oAYlNkjvwWEuJeZIr3deWw5pv1-CuSo");
 //     }
-// );
-
-/* Primary Functions */
-
-function initialize()
-{
-    timeElement.text(dateTime.toLocaleString(luxon.DateTime.TIME_SIMPLE));
-    dateElement.text(dateTime.toLocaleString(luxon.DateTime.DATE_HUGE));
-}
-
-/* Helper Functions */
-
-function general() {
-    //calls for general *Default*
-    var requesturl = 'http://api.mediastack.com/v1/news?languages=en&access_key=cd39f68da5d87fa40deb5baf33377368';
-    $.ajax({
-        url: requesturl,
-        type: "GET",
-        success: function(response)
-        {
-            console.log(requesturl);
-            console.log(response);
-        }
-    });
-}
-
-function business() {
-    //calls for businesss
-    var requesturl = `http://api.mediastack.com/v1/news?languages=en&sources=business&access_key=cd39f68da5d87fa40deb5baf33377368&date=` + date;
-    $.ajax({
-        url: requesturl,
-        type: "GET",
-        success: function(response)
-        {
-            console.log('business data: ' + response);
-        }
-    });
-}
-
-function entertainment() {
-    //calls for entertainment
-    var requesturl = `http://api.mediastack.com/v1/news?languages=en&sources=entertainment&access_key=cd39f68da5d87fa40deb5baf33377368&date=` + date;
-    $.ajax({
-        url: requesturl,
-        type: "GET",
-        success: function(response)
-        {
-            console.log('entertainment data: ' + response);
-        }
-    });
-}
-
-function technology() {
-    //calls for technology
-    var requesturl = 'http://api.mediastack.com/v1/news?languages=en&sources=technology&access_key=cd39f68da5d87fa40deb5baf33377368&date=' + date;
-    $.ajax({
-        url: requesturl,
-        type: "GET",
-        success: function(response)
-        {
-            console.log('technology: ' + response);
-        }
-    });    
-}
-
-function science() {
-    //calls for science
-    var requesturl = 'http://api.mediastack.com/v1/news?languages=en&sources=science&access_key=cd39f68da5d87fa40deb5baf33377368&date=' + date;
-    $.ajax({
-        url: requesturl,
-        type: "GET",
-        success: function(response)
-        {
-            console.log('science: ' + response);
-        }
-    });    
-}
+// });
 
 /* Attaching Listeners */
-$(document).ready(function ()
+
+$('#tabs li').on('click', function ()
 {
-    $('#tabs li').on('click', function ()
-    {
-        var tabs = $(this).data('tabs');
-        $('#tabs li').removeClass('is-active');
-        $(this).addClass('is-active');
-    });
+    var tabs = $(this).data('tabs');
+    $('#tabs li').removeClass('is-active');
+    $(this).addClass('is-active');
 });
 
 /* Function Calls */
 
-initialize();
+Initialize();
 
 /* Testing */
 
-general();
-business();
-entertainment();
-technology();
-science();
+APICalls("entertainment");
 
 });
