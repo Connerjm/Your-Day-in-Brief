@@ -16,7 +16,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
 
     var dateTime = luxon.DateTime.local();//Gets the luxon DateTime object.
     var date = dateTime.toFormat("yyyy'-'LL'-'dd");//Custom formatting to put in the request url.
-
+    
     var userInfoObj = {};
 
     /* Primary Functions */
@@ -70,15 +70,77 @@ $(document).ready(function ()//Encouraged when using jQuery.
     }
 
     function APIWeatherCalls() {
-        var requesturl = `https://api.openweathermap.org/data/2.5/weather?q=${zipcode}&appid=${weather_KEY}`
+    //Shayla's addition starts 73//
+        //variable zipcode is temp until modal functioning
+        //when ready to use modal, be sure to change the var in the url
+        var zipcode = "98312";
+        //added property to get farenheit return
+        var requesturl = `https://api.openweathermap.org/data/2.5/weather?q=${zipcode}&units=imperial&appid=${weather_KEY}`;
+        $.ajax({
+            url: requesturl,
+            type: "GET",
+            success: function (response) {
+                //Do something with the response data.
+                console.log(requesturl);
+                console.log(response);
 
+               // $(".day")  This may be redundant
+               // $(".date") since displayed in heading
+                
+                $(".name").html(response.name);
+                $(".temp").html(`Temperature: ${response.main.temp}\xB0F`);
+                $(".humidity").html(`Humidity: ${response.main.humidity}%`);
+                $(".description").html(response.weather[0].description);
+
+                //Weather icon
+                var icon = response.weather[0].icon;
+                iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
+                $(".weather-icon").attr('src', iconUrl);
+
+                //Dealing with lighphases to display cool effect
+                //The background behind the icon will adjust according to time of day ie dawn, day, twilight, night
+                var lightPhase = $("#lightphase");
+
+                var timestamp = response.dt;
+                var sunrise = response.sys.sunrise;
+                var sunset = response.sys.sunset;
+                console.log(timestamp);
+                
+                //30 minutes before sunrise
+                var sunriseMinusThirty = response.sys.sunrise - 1800;
+                //15 minutes before sunrise
+                var sunriseMinusFifteen = response.sys.sunrise - 900;
+                //15 minutes after sunset
+                var sunsetPlusFifteen = response.sys.sunset + 900;
+                //30 minutes after sunset
+                var sunsetPlusThirty = response.sys.sunset + 1800;
+
+                //conditionals to determine lightphase of the day
+                //    this can be condensed,but I thought it would be
+                //    easier for the team to see what's going on as is
+                if (timestamp < sunriseMinusThirty) {
+                    lightPhase.addClass("night");
+                } else if (timestamp < sunriseMinusFifteen) {
+                    lightPhase.addClass("nauticalTwilight");
+                } else if (timestamp < sunrise) {
+                    lightPhase.addClass("civilTwilight");
+                } else if (timestamp < sunset) {
+                    lightPhase.addClass("day");
+                } else if (timestamp < sunsetPlusFifteen) {
+                    lightPhase.addClass("civilTwilight");
+                } else if (timestamp < sunsetPlusThirty) {
+                    lightPhase.addClass("nauticalTwilight");
+                } else {
+                    lightPhase.addClass("night");
+                }
+            },
+            error: function (errorinfo) {
+                alert("Bad Weather Ahead");
+                console.log(errorinfo);
+            }
+        })
     }
-
-
-
-
-
-
+    ///shayla's addition ends 143
 
 
     // fetch('http://api.mediastack.com/v1/news?language=en&access_key=de49fa1cabbba1c8b04d87008d800e06&countries=us&date=2021-02-04&&sources=sports')
@@ -114,6 +176,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
     /* Testing */
 
     APICalls("entertainment");
+    APIWeatherCalls();
 
 });
 

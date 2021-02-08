@@ -73,3 +73,30 @@ hr {
 }
 
 /* Weather */
+.name {
+    font-weight: bold;
+    font-size: large;
+}
+
+.night {
+background-image: linear-gradient(black, rgb(12, 9, 53), rgb(23, 15, 66));
+}
+
+.nauticalTwilight {
+background-color: linear-gradient(rgb(23, 15, 66), rgb(44, 33, 102), rgb(70, 60, 131));
+}
+
+.civilTwilight {
+background-color: linear-gradient(rgb(70, 60, 131) ,rgb(131, 60, 131), rgb(230, 140, 56));
+}
+
+.day {
+background-color: linear-gradient(rgb(230, 140, 56), rgb(223, 183, 75), rgb(158, 156, 154));
+}
+
+#lightphase {
+    padding: 0px;
+    display: flex;
+    justify-content: center;
+    
+}
