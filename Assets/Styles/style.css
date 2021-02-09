@@ -37,7 +37,12 @@ header .title, header .subtitle {
 
 /* Main container */
 .modal-card-foot, .modal-card-head {
-    background-color: #57a9a987;
+    background-color: #805B87;
+}
+
+.modal-card-title {
+    color: #CAFFFB;
+    text-shadow: 2px 2px #014182;
 }
 
 #news-container, #weather-container {
@@ -50,9 +55,9 @@ header .title, header .subtitle {
     display: none;
   }
 
-  #tab-content p.is-active {
-    display: block;
-  }
+#tab-content p.is-active {
+display: block;
+}
 
 hr {
     border-top: solid 1px #014182;
@@ -98,5 +103,4 @@ background-color: linear-gradient(rgb(230, 140, 56), rgb(223, 183, 75), rgb(158,
     padding: 0px;
     display: flex;
     justify-content: center;
-    
 }

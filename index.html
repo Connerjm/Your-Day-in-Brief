@@ -17,34 +17,33 @@
 
 <body>
     <!-- Creating a modal for the popup. -->
-    <div id="modal" class="modal is-active">
+    <div id="modal" class="modal">
         <div class="modal-background"></div>
         <!-- Inner content for the popup. -->
-        <div class="modal-content">
+        <div class="modal-card">
             <header class="modal-card-head">
-                <h2>User Information</h2>
+                <p class="modal-card-title">User Information</p>
             </header>
-            <hr>
-            <form>
-                <!-- collect name -->
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name">
-                <br>
-                <!-- collect zip code -->
-                <label for="lowercase">Zip Code</label>
-                <input type="text" id="zipCode" name="zipCode">
-                <br>
-                <!--toggle for social media-->
-                <!-- <input type="checkbox" id="uppercase" name="uppercase" value="Upper Case">
-            <label for="uppercase">Upper Case</label>
-            <br> -->
-
+            <form class="modal-card-body">
+                <!-- Collect name -->
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input type="text" class="input" id="name" placeholder="Your Name">
+                    </div>
+                </div>
+                <!-- Collect zip-code -->
+                <div class="field">
+                    <label class="label">Zip-Code</label>
+                    <div class="control">
+                        <input type="text" class="input" id="zip-code" placeholder="98387">
+                    </div>
+                    <p class="help">Please input a valid five digit zip-code.</p>
+                </div>
             </form>
-            <br>
-            <hr>
             <footer class="modal-card-foot">
                 <button id="cancel" class="button">Cancel</button>
-                <button id="submit" class="button is-success">Submit</button>
+                <button id="submit" class="button is-link">Submit</button>
             </footer>
         </div>
     </div>
@@ -107,13 +106,13 @@
             <div class="weather-card columns">
                 <!--nested image in order to apply lightphase background-->
                 <div id="lightphase" class="column is-5">
-                    <img class="weather-icon" src="" alt="Icon of the weather">
+                    <img class="weather-icon" src="#" alt="Icon of the weather">
                 </div>
                 <div class="weather-card-info column is-7">
                     <!-- Currently not being used
                     <h2 class="day">Wednesday</h2>
                     <h2 class="date">02/03/2021</h2> -->
-                    <h2 class="name"></h2>
+                    <h2 class="name">#</h2>
                     <p class="temp"></p>
                     <p class="humidity"></p>
                     <p class="description"></p>

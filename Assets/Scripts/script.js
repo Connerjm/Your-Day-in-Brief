@@ -1,23 +1,19 @@
 $(document).ready(function ()//Encouraged when using jQuery.
 {
-    //$("#modal").modal('show');
-
     /* DOM Elements */
 
     var timeElement = $(".time");
     var dateElement = $(".date");
 
-
     /* Variables */
 
-    //const API_KEY = "cd39f68da5d87fa40deb5baf33377368";//Replace API key here if it expires.
-    const API_KEY = "4b505f48bed1120432d9b47c6c779234";
-    const weather_KEY = "e3171896dd984662b81687f80e4b2acd";
+    //Replace API keys here if one expires.
+    const NEWS_API_KEY = "4b505f48bed1120432d9b47c6c779234";
+    const WEATHER_API_KEY = "e3171896dd984662b81687f80e4b2acd";
 
     var dateTime = luxon.DateTime.local();//Gets the luxon DateTime object.
-    var date = dateTime.toFormat("yyyy'-'LL'-'dd");//Custom formatting to put in the request url.
     
-    var userInfoObj = {};
+    var userInfoObj;//Object holding the users name and zip code.
 
     /* Primary Functions */
 
@@ -27,25 +23,22 @@ $(document).ready(function ()//Encouraged when using jQuery.
         timeElement.text(dateTime.toLocaleString(luxon.DateTime.TIME_SIMPLE));
         dateElement.text(dateTime.toLocaleString(luxon.DateTime.DATE_HUGE));
 
+        //Sets elements to the default news API call.
+        APINewsCalls("breaking-news");
 
-        $('#modal').css('display', 'block');
-        var nameEl = $('#name').val();
-        var zipCodeEl = $('#zipCode').val();
-
-
-    }
-    // Close the popup.
-    var close = document.getElementsByClassName('modal')[0];
-    close.onclick = function () {
-        $('#modal').css('display', 'none');
+        //Prompts user for info if first time, otherwise grab from storage.
+        if (localStorage.getItem("userInfo"))
+            userInfoObj = JSON.parse(localStorage.getItem("userInfo"));
+        else
+            $("#modal").addClass("is-active");
     }
 
     /* Helper Functions */
 
     //API calls for the given category.
     //general, business, entertainment, health, science, sports, and technology.
-    function APICalls(category) {
-        var requesturl = `https://gnews.io/api/v4/top-headlines?token=${API_KEY}&lang=en&topic=${category}`;
+    function APINewsCalls(category) {
+        var requesturl = `https://gnews.io/api/v4/top-headlines?token=${NEWS_API_KEY}&lang=en&topic=${category}`;
 
         $.ajax({
             url: requesturl,
@@ -75,7 +68,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
         //when ready to use modal, be sure to change the var in the url
         var zipcode = "98312";
         //added property to get farenheit return
-        var requesturl = `https://api.openweathermap.org/data/2.5/weather?q=${zipcode}&units=imperial&appid=${weather_KEY}`;
+        var requesturl = `https://api.openweathermap.org/data/2.5/weather?q=${zipcode}&units=imperial&appid=${WEATHER_API_KEY}`;
         $.ajax({
             url: requesturl,
             type: "GET",
@@ -142,28 +135,26 @@ $(document).ready(function ()//Encouraged when using jQuery.
     }
     ///shayla's addition ends 143
 
-
-    // fetch('http://api.mediastack.com/v1/news?language=en&access_key=de49fa1cabbba1c8b04d87008d800e06&countries=us&date=2021-02-04&&sources=sports')
-    // .then(response => response.json())
-    // .then(data =>
-    // {
-    //     console.log(data)
-
-    //     $("#sportNews").click(function ()
-    //     {
-    //         console.log("clicked");
-    //         $(".headline").html(data.data[0].description)
-    //         $(".publish-date").html((data.data[0].published_at).slice(0, 10));
-    //         $(".author").html(data.data[0].author)
-    //         $(".link").attr("href", "https://sports.yahoo.com/british-boxers-restart-olympic-preparations-124711072.html?src=rss")
-    //         $(".news-image").attr("src", "https://lh3.googleusercontent.com/proxy/UsLknsEkc-nha6DEV2jS39evfDxHU3FDFjgz6GO9teVykedivtplIkf5WCxTSvNWMYnjxARj26Y3gyEAk233-oAYlNkjvwWEuJeZIr3deWw5pv1-CuSo");
-    //     }
-    // });
-
     /* Attaching Listeners */
 
+    //Cancel button in modal.
+    $("#cancel").on("click", function() {
+        $("#modal").removeClass("is-active");
+    });
+
+    //Submit button in modal.
+    $("#submit").on("click", function() {
+        $("#modal").removeClass("is-active");
+        userInfoObj = {
+            userName : $("#name").val(),
+            userZipCode : z$("#zip-code").val()
+        };
+        localStorage.setItem("userInfo", JSON.stringify(userInfoObj));
+    });
+
+    //Tabs with the news categories.
     $('#tabs li').on('click', function () {
-        APICalls($(this).data('tab'));
+        APINewsCalls($(this).data('tab'));
 
         $('#tabs li').removeClass('is-active');
         $(this).addClass('is-active');
@@ -171,13 +162,11 @@ $(document).ready(function ()//Encouraged when using jQuery.
 
     /* Function Calls */
 
+    //Get the ball rolling.
     Initialize();
 
     /* Testing */
 
-    APICalls("entertainment");
     APIWeatherCalls();
 
 });
-
-/////
