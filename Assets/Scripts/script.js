@@ -8,7 +8,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
     /* Variables */
 
     //Replace API keys here if one expires.
-    const NEWS_API_KEY = "4b505f48bed1120432d9b47c6c779234";
+    const NEWS_API_KEY = "b8e833a770cf7d2a96c213916cac289d";
     const WEATHER_API_KEY = "e3171896dd984662b81687f80e4b2acd";
 
     var dateTime = luxon.DateTime.local();//Gets the luxon DateTime object.
@@ -62,11 +62,9 @@ $(document).ready(function ()//Encouraged when using jQuery.
         });
     }
 
-    function APITodayWeatherCalls() {
-        //variable zipcode is temp until modal functioning
-        //when ready to use modal, be sure to change the var in the url
-        var zipcode = "98312";
-        //added property to get farenheit return
+    function APITodayWeatherCalls(userInfoObj) {
+        var zipcode = 98312;
+        
         var requesturl = `https://api.openweathermap.org/data/2.5/weather?q=${zipcode}&units=imperial&appid=${WEATHER_API_KEY}`;
         $.ajax({
             url: requesturl,
@@ -87,31 +85,36 @@ $(document).ready(function ()//Encouraged when using jQuery.
                 iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
                 $("#today-weather-icon").attr('src', iconUrl);
 
-                //Start lightphase feature
-                var lightPhase = $("#lightphase");
-                var timestamp = response.dt;
-                var sunrise = response.sys.sunrise;
-                var sunset = response.sys.sunset;
-                console.log(timestamp);
+                //Start light phase feature
+                var lightPhase = $("#light-phase");
+                var tempTimestamp = response.dt;
+                var tempSunrise = response.sys.sunrise;
+                var tempSunset = response.sys.sunset;
 
-                //the problem is that the timezone isn't ours! Thinking....
-                dateObj = new Date(timestamp * 1000); 
-                timeString = dateObj.toUTCString(); 
-                unixTime = timeString.slice(-11, -4); 
-                console.log(unixTime);
-
+                //Convert global unix timestamps to local time: 8 hrs * 60 min * 60 sec * 1000 ms
+                var timestamp = $($(tempTimestamp - 8 * 60 * 60 * 1000));
+                timestamp = timestamp[0];
+                
+                var sunrise = $($(tempSunrise - 8 * 60 * 60 * 1000));
+                sunrise = sunrise[0];
+            
+                var sunset = $($(tempSunset - 8 * 60 * 60 * 1000));
+                sunset = sunset[0];
+                
                 //30 minutes before sunrise
-                var sunriseMinusThirty = response.sys.sunrise - 1800;
+                var sunriseMinusThirty = $($(sunrise - 30 * 60 * 1000));
+                sunriseMinusThirty = sunriseMinusThirty[0];
                 //15 minutes before sunrise
-                var sunriseMinusFifteen = response.sys.sunrise - 900;
+                var sunriseMinusFifteen = $($(sunrise - 15 * 60 * 1000));
+                sunriseMinusFifteen = sunriseMinusFifteen[0];
                 //15 minutes after sunset
-                var sunsetPlusFifteen = response.sys.sunset + 900;
+                var sunsetPlusFifteen = $($(sunset + 15 * 60 * 1000));
+                sunsetPlusFifteen = sunsetPlusFifteen[0];
                 //30 minutes after sunset
-                var sunsetPlusThirty = response.sys.sunset + 1800;
+                var sunsetPlusThirty = $($(sunset + 30 * 60 * 1000));
+                sunsetPlusThirty = sunsetPlusThirty[0];
 
-                //conditionals to determine lightphase of the day
-                //    this can be condensed,but I thought it would be
-                //    easier for the team to see what's going on as is
+                //Conditionals to determine light phase of the day
                 if (timestamp < sunriseMinusThirty) {
                     lightPhase.addClass("night");
                 } else if (timestamp < sunriseMinusFifteen) {
@@ -128,7 +131,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
                     lightPhase.addClass("night");
                 }
             },
-            //end lightphase feature
+            //End light phase feature
 
             error: function (errorinfo) {
                 alert("Bad Weather Ahead");
@@ -140,7 +143,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
     function APITomorrowWeatherCalls() {
         var zipcode = 98312;
         var requesturl = `https://api.openweathermap.org/data/2.5/forecast?q=${zipcode}&units=imperial&appid=${WEATHER_API_KEY}`;
-
+        
         $.ajax({
             url: requesturl,
             type: "GET",
@@ -158,7 +161,6 @@ $(document).ready(function ()//Encouraged when using jQuery.
                 var icon = response.list[2].weather[0].icon;
                 iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
                 $("#tomorrow-weather-icon").attr('src', iconUrl);
-
             },
             error: function (errorinfo) {
                 alert("Bad Weather Ahead");
@@ -179,7 +181,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
         $("#modal").removeClass("is-active");
         userInfoObj = {
             userName: $("#name").val(),
-            userZipCode: z$("#zip-code").val()
+            userZipCode: $("#zip-code").val()
         };
         localStorage.setItem("userInfo", JSON.stringify(userInfoObj));
     });
