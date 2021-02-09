@@ -62,8 +62,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
         });
     }
 
-    function APIWeatherCalls() {
-        //Shayla's addition starts 73//
+    function APITodayWeatherCalls() {
         //variable zipcode is temp until modal functioning
         //when ready to use modal, be sure to change the var in the url
         var zipcode = "98312";
@@ -77,27 +76,29 @@ $(document).ready(function ()//Encouraged when using jQuery.
                 console.log(requesturl);
                 console.log(response);
 
-                // $(".day")  This may be redundant
-                // $(".date") since displayed in heading
-
-                $(".name").html(response.name);
-                $(".temp").html(`Temperature: ${response.main.temp}\xB0F`);
-                $(".humidity").html(`Humidity: ${response.main.humidity}%`);
-                $(".description").html(response.weather[0].description);
+                $("#today-name").html(response.name);
+                $("#today-high").html(`High: ${response.main.temp_max}\xB0F`)
+                $("#today-low").html(`Low: ${response.main.temp_min}\xB0F`);
+                $("#today-humidity").html(`Humidity: ${response.main.humidity}%`);
+                $("#today-description").html(response.weather[0].description);
 
                 //Weather icon
                 var icon = response.weather[0].icon;
                 iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
-                $(".weather-icon").attr('src', iconUrl);
+                $("#today-weather-icon").attr('src', iconUrl);
 
-                //Dealing with lighphases to display cool effect
-                //The background behind the icon will adjust according to time of day ie dawn, day, twilight, night
+                //Start lightphase feature
                 var lightPhase = $("#lightphase");
-
                 var timestamp = response.dt;
                 var sunrise = response.sys.sunrise;
                 var sunset = response.sys.sunset;
                 console.log(timestamp);
+
+                //the problem is that the timezone isn't ours! Thinking....
+                dateObj = new Date(timestamp * 1000); 
+                timeString = dateObj.toUTCString(); 
+                unixTime = timeString.slice(-11, -4); 
+                console.log(unixTime);
 
                 //30 minutes before sunrise
                 var sunriseMinusThirty = response.sys.sunrise - 1800;
@@ -114,18 +115,50 @@ $(document).ready(function ()//Encouraged when using jQuery.
                 if (timestamp < sunriseMinusThirty) {
                     lightPhase.addClass("night");
                 } else if (timestamp < sunriseMinusFifteen) {
-                    lightPhase.addClass("nauticalTwilight");
+                    lightPhase.addClass("nautical-twilight");
                 } else if (timestamp < sunrise) {
-                    lightPhase.addClass("civilTwilight");
+                    lightPhase.addClass("civil-twilight");
                 } else if (timestamp < sunset) {
                     lightPhase.addClass("day");
                 } else if (timestamp < sunsetPlusFifteen) {
-                    lightPhase.addClass("civilTwilight");
+                    lightPhase.addClass("civil-twilight");
                 } else if (timestamp < sunsetPlusThirty) {
-                    lightPhase.addClass("nauticalTwilight");
+                    lightPhase.addClass("nautical-twilight");
                 } else {
                     lightPhase.addClass("night");
                 }
+            },
+            //end lightphase feature
+
+            error: function (errorinfo) {
+                alert("Bad Weather Ahead");
+                console.log(errorinfo);
+            }
+        })
+    }
+
+    function APITomorrowWeatherCalls() {
+        var zipcode = 98312;
+        var requesturl = `https://api.openweathermap.org/data/2.5/forecast?q=${zipcode}&units=imperial&appid=${WEATHER_API_KEY}`;
+
+        $.ajax({
+            url: requesturl,
+            type: "GET",
+            success: function (response) {
+                //Do something with the response data.
+                console.log(requesturl);
+                console.log(response);
+
+                $("#tomorrow-high").html(`High: ${response.list[2].main.temp_max}\xB0F`);
+                $("#tomorrow-low").html(`Low: ${response.list[2].main.temp_min}\xB0F`);
+                $("#tomorrow-humidity").html(`Humidity: ${response.list[2].main.humidity}%`);
+                $("#tomorrow-description").html(response.list[2].weather[0].description);
+
+                //Weather icon
+                var icon = response.list[2].weather[0].icon;
+                iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
+                $("#tomorrow-weather-icon").attr('src', iconUrl);
+
             },
             error: function (errorinfo) {
                 alert("Bad Weather Ahead");
@@ -133,7 +166,6 @@ $(document).ready(function ()//Encouraged when using jQuery.
             }
         })
     }
-    ///shayla's addition ends 143
 
     /* Attaching Listeners */
 
@@ -167,6 +199,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
 
     /* Testing */
 
-    APIWeatherCalls();
+    APITodayWeatherCalls();
+    APITomorrowWeatherCalls()
 
 });
