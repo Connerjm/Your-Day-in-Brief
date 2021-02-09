@@ -16,7 +16,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
 
     var dateTime = luxon.DateTime.local();//Gets the luxon DateTime object.
     var date = dateTime.toFormat("yyyy'-'LL'-'dd");//Custom formatting to put in the request url.
-    
+
     var userInfoObj = {};
 
     /* Primary Functions */
@@ -35,10 +35,9 @@ $(document).ready(function ()//Encouraged when using jQuery.
 
     }
     // Close the popup.
-    var close = document.getElementsByClassName('modal')[0];
-    close.onclick = function () {
-        $('#modal').css('display', 'none');
-    }
+    $(".modal-background, #cancel").click(function () {
+        $('.modal').css('display', 'none');
+    })
 
     /* Helper Functions */
 
@@ -70,7 +69,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
     }
 
     function APIWeatherCalls() {
-    //Shayla's addition starts 73//
+        //Shayla's addition starts 73//
         //variable zipcode is temp until modal functioning
         //when ready to use modal, be sure to change the var in the url
         var zipcode = "98312";
@@ -84,9 +83,9 @@ $(document).ready(function ()//Encouraged when using jQuery.
                 console.log(requesturl);
                 console.log(response);
 
-               // $(".day")  This may be redundant
-               // $(".date") since displayed in heading
-                
+                // $(".day")  This may be redundant
+                // $(".date") since displayed in heading
+
                 $(".name").html(response.name);
                 $(".temp").html(`Temperature: ${response.main.temp}\xB0F`);
                 $(".humidity").html(`Humidity: ${response.main.humidity}%`);
@@ -105,7 +104,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
                 var sunrise = response.sys.sunrise;
                 var sunset = response.sys.sunset;
                 console.log(timestamp);
-                
+
                 //30 minutes before sunrise
                 var sunriseMinusThirty = response.sys.sunrise - 1800;
                 //15 minutes before sunrise
