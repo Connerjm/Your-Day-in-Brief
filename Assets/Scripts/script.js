@@ -12,7 +12,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
     const WEATHER_API_KEY = "e3171896dd984662b81687f80e4b2acd";
 
     var dateTime = luxon.DateTime.local();//Gets the luxon DateTime object.
-    
+
     var userInfoObj;//Object holding the users name and zip code.
 
     /* Primary Functions */
@@ -63,7 +63,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
     }
 
     function APIWeatherCalls() {
-    //Shayla's addition starts 73//
+        //Shayla's addition starts 73//
         //variable zipcode is temp until modal functioning
         //when ready to use modal, be sure to change the var in the url
         var zipcode = "98312";
@@ -77,9 +77,9 @@ $(document).ready(function ()//Encouraged when using jQuery.
                 console.log(requesturl);
                 console.log(response);
 
-               // $(".day")  This may be redundant
-               // $(".date") since displayed in heading
-                
+                // $(".day")  This may be redundant
+                // $(".date") since displayed in heading
+
                 $(".name").html(response.name);
                 $(".temp").html(`Temperature: ${response.main.temp}\xB0F`);
                 $(".humidity").html(`Humidity: ${response.main.humidity}%`);
@@ -98,7 +98,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
                 var sunrise = response.sys.sunrise;
                 var sunset = response.sys.sunset;
                 console.log(timestamp);
-                
+
                 //30 minutes before sunrise
                 var sunriseMinusThirty = response.sys.sunrise - 1800;
                 //15 minutes before sunrise
@@ -138,16 +138,16 @@ $(document).ready(function ()//Encouraged when using jQuery.
     /* Attaching Listeners */
 
     //Cancel button in modal.
-    $("#cancel").on("click", function() {
+    $("#cancel, .modal-background").on("click", function () {
         $("#modal").removeClass("is-active");
     });
 
     //Submit button in modal.
-    $("#submit").on("click", function() {
+    $("#submit").on("click", function () {
         $("#modal").removeClass("is-active");
         userInfoObj = {
-            userName : $("#name").val(),
-            userZipCode : z$("#zip-code").val()
+            userName: $("#name").val(),
+            userZipCode: z$("#zip-code").val()
         };
         localStorage.setItem("userInfo", JSON.stringify(userInfoObj));
     });
