@@ -8,7 +8,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
     /* Variables */
 
     //Replace API keys here if one expires.
-    const NEWS_API_KEY = "b8e833a770cf7d2a96c213916cac289d";
+    const NEWS_API_KEY = "21e73771a7cf8bf8e377a0872d5c69a4";
     const WEATHER_API_KEY = "e3171896dd984662b81687f80e4b2acd";
 
     var dateTime = luxon.DateTime.local();//Gets the luxon DateTime object.
@@ -37,7 +37,8 @@ $(document).ready(function ()//Encouraged when using jQuery.
             $("#modal").addClass("is-active");
         }
     }
-
+    Initialize();
+console.log(userInfoObj.userCity);
     /* Helper Functions */
 
     //API calls for the given category.
@@ -59,6 +60,18 @@ $(document).ready(function ()//Encouraged when using jQuery.
                 $(".link").attr("href", response.articles[0].url).html(response.articles[0].source.name);
                 $(".news-image").attr("src", response.articles[0].image, "alt", "News Image");
 
+
+                $(".headline1").text("\"" + response.articles[1].title + ".\"");
+                $(".publish-date1").text("Published " + (response.articles[1].publishedAt).slice(0, 10));
+                $(".link1").attr("href", response.articles[1].url).html(response.articles[1].source.name);
+                $(".news-image1").attr("src", response.articles[1].image, "alt", "News Image");
+
+
+                $(".headline2").text("\"" + response.articles[2].title + ".\"");
+                $(".publish-date2").text("Published " + (response.articles[2].publishedAt).slice(0, 10));
+                $(".link2").attr("href", response.articles[2].url).html(response.articles[2].source.name);
+                $(".news-image2").attr("src", response.articles[2].image, "alt", "News Image");
+
             },
             error: function (errorinfo) {
                 alert("Whoopsies. Something went wrong.");
@@ -68,9 +81,9 @@ $(document).ready(function ()//Encouraged when using jQuery.
     }
 
     function APITodayWeatherCalls(userInfoObj) {
-        var zipcode = 98312;
-        
-        var requesturl = `https://api.openweathermap.org/data/2.5/weather?q=${zipcode}&units=imperial&appid=${WEATHER_API_KEY}`;
+        var city = userInfoObj.userCity;
+        console.log(city);
+        var requesturl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${WEATHER_API_KEY}`;
         $.ajax({
             url: requesturl,
             type: "GET",
@@ -146,8 +159,8 @@ $(document).ready(function ()//Encouraged when using jQuery.
     }
 
     function APITomorrowWeatherCalls() {
-        var zipcode = 98312;
-        var requesturl = `https://api.openweathermap.org/data/2.5/forecast?q=${zipcode}&units=imperial&appid=${WEATHER_API_KEY}`;
+        var city = userInfoObj.userCity;
+        var requesturl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${WEATHER_API_KEY}`;
         
         $.ajax({
             url: requesturl,
@@ -161,6 +174,48 @@ $(document).ready(function ()//Encouraged when using jQuery.
                 $("#tomorrow-low").html(`Low: ${response.list[2].main.temp_min}\xB0F`);
                 $("#tomorrow-humidity").html(`Humidity: ${response.list[2].main.humidity}%`);
                 $("#tomorrow-description").html(response.list[2].weather[0].description);
+
+
+                $("#day1-high").html(`High: ${response.list[11].main.temp_max}\xB0F`);
+                $("#day1-low").html(`Low: ${response.list[11].main.temp_min}\xB0F`);
+                $("#day1-humidity").html(`Humidity: ${response.list[11].main.humidity}%`);
+                $("#day1-description").html(response.list[11].weather[0].description);
+                $("#day1-date").html((response.list[11].dt_txt).slice(0,10));
+                var icon = response.list[11].weather[0].icon;
+                iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
+                $("#day1-weather-icon").attr('src', iconUrl);
+
+
+                $("#day2-high").html(`High: ${response.list[18].main.temp_max}\xB0F`);
+                $("#day2-low").html(`Low: ${response.list[18].main.temp_min}\xB0F`);
+                $("#day2-humidity").html(`Humidity: ${response.list[18].main.humidity}%`);
+                $("#day2-description").html(response.list[18].weather[0].description);
+                $("#day2-date").html((response.list[18].dt_txt).slice(0,10));
+                var icon = response.list[18].weather[0].icon;
+                iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
+                $("#day2-weather-icon").attr('src', iconUrl);
+
+
+                $("#day3-high").html(`High: ${response.list[26].main.temp_max}\xB0F`);
+                $("#day3-low").html(`Low: ${response.list[26].main.temp_min}\xB0F`);
+                $("#day3-humidity").html(`Humidity: ${response.list[26].main.humidity}%`);
+                $("#day3-description").html(response.list[26].weather[0].description);
+                $("#day3-date").html((response.list[26].dt_txt).slice(0,10));
+                var icon = response.list[26].weather[0].icon;
+                iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
+                $("#day3-weather-icon").attr('src', iconUrl);
+
+
+
+
+
+
+
+
+
+
+
+
 
                 //Weather icon
                 var icon = response.list[2].weather[0].icon;
@@ -187,7 +242,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
         $("#modal").removeClass("is-active");
         userInfoObj = {
             userName: $("#name").val(),
-            userZipCode: $("#zip-code").val()
+            userCity: $("#city").val()
         };
         localStorage.setItem("userInfo", JSON.stringify(userInfoObj));
         $("#greeting").text(userInfoObj.userName);
@@ -204,11 +259,11 @@ $(document).ready(function ()//Encouraged when using jQuery.
     /* Function Calls */
 
     //Get the ball rolling.
-    Initialize();
+    // Initialize();
 
     /* Testing */
 
-    APITodayWeatherCalls();
-    APITomorrowWeatherCalls()
+    APITodayWeatherCalls(userInfoObj);
+    APITomorrowWeatherCalls(userInfoObj);
 
 });
