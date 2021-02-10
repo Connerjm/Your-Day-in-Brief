@@ -179,6 +179,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
     //Cancel button in modal.
     $("#cancel, .modal-background").on("click", function () {
         $("#modal").removeClass("is-active");
+        $("#greeting").text("Person");
     });
 
     //Submit button in modal.
