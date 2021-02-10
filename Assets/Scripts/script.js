@@ -28,9 +28,13 @@ $(document).ready(function ()//Encouraged when using jQuery.
 
         //Prompts user for info if first time, otherwise grab from storage.
         if (localStorage.getItem("userInfo"))
+        {
             userInfoObj = JSON.parse(localStorage.getItem("userInfo"));
+        }
         else
+        {
             $("#modal").addClass("is-active");
+        }
     }
 
     /* Helper Functions */
@@ -49,8 +53,8 @@ $(document).ready(function ()//Encouraged when using jQuery.
                 console.log(response);
 
                 //Responses called when category tabs are clicked
-                $(".headline").html(response.articles[0].content);
-                $(".publish-date").html((response.articles[0].publishedAt).slice(0, 10));
+                $(".headline").text("\"" + response.articles[0].title + ".\"");
+                $(".publish-date").text("Published " + (response.articles[0].publishedAt).slice(0, 10));
                 $(".link").attr("href", response.articles[0].url).html(response.articles[0].source.name);
                 $(".news-image").attr("src", response.articles[0].image, "alt", "News Image");
 
