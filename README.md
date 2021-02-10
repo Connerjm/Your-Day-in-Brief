@@ -7,6 +7,7 @@
 - [Technologies](#technologies)
 - [Launch](#launch)
 - [Images](#images)
+- [Notes](#notes)
 
 ## Introduction
 
