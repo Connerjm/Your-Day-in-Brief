@@ -78,7 +78,8 @@ hr {
 }
 
 /* Weather */
-.name {
+
+.weather-card h2 {
     font-weight: bold;
     font-size: large;
 }
@@ -87,19 +88,19 @@ hr {
 background-image: linear-gradient(black, rgb(12, 9, 53), rgb(23, 15, 66));
 }
 
-.nauticalTwilight {
-background-color: linear-gradient(rgb(23, 15, 66), rgb(44, 33, 102), rgb(70, 60, 131));
+.nautical-twilight {
+background-image: linear-gradient(rgb(23, 15, 66), rgb(44, 33, 102), rgb(70, 60, 131));
 }
 
-.civilTwilight {
-background-color: linear-gradient(rgb(70, 60, 131) ,rgb(131, 60, 131), rgb(230, 140, 56));
+.civil-twilight {
+background-image: linear-gradient(rgb(70, 60, 131) ,rgb(131, 60, 131), rgb(230, 140, 56));
 }
 
 .day {
-background-color: linear-gradient(rgb(230, 140, 56), rgb(223, 183, 75), rgb(158, 156, 154));
+background-image: linear-gradient(rgb(103, 156, 226), rgb(212, 201, 136), rgb(145, 185, 218));
 }
 
-#lightphase {
+.icon-container {
     padding: 0px;
     display: flex;
     justify-content: center;

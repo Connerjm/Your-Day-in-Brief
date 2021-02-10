@@ -54,6 +54,7 @@
             <div class="date-time column is-one-fifth">
                 <p class="time"></p>
                 <p class="date"></p>
+                <p>Hello, <span id="greeting"></span></p>
             </div>
             <div class="welcome-title has-text-centered column">
                 <p class="title is-1">Your Day in Brief</p>
@@ -100,22 +101,33 @@
 
         <!--Weather Column-->
         <div class="column is-4" id="weather-container">
-            <h1 class="subtitle">Weather Forecast</h1>
+            <h1 class="subtitle">Weather Forecast for <span id="today-name"></span></h1>
             <hr>
             <!-- Single weather card starts here. -->
-            <div class="weather-card columns">
-                <!--nested image in order to apply lightphase background-->
-                <div id="lightphase" class="column is-5">
-                    <img class="weather-icon" src="#" alt="Icon of the weather">
+            <div id="light-phase" class="weather-card columns">
+                <div class="column is-5 icon-container">
+                    <img id="today-weather-icon" class="weather-icon" src="#" alt="Icon of the weather">
                 </div>
                 <div class="weather-card-info column is-7">
-                    <!-- Currently not being used
-                    <h2 class="day">Wednesday</h2>
-                    <h2 class="date">02/03/2021</h2> -->
-                    <h2 class="name">#</h2>
-                    <p class="temp"></p>
-                    <p class="humidity"></p>
-                    <p class="description"></p>
+                    <h2>Today</h2>
+                    <p id="today-high" class="temp"></p>
+                    <p id="today-low" class="temp"></p>
+                    <p id="today-humidity" class="humidity"></p>
+                    <p id="today-description" class="description"></p>
+                </div>
+            </div>
+            <!-- And ends here. -->
+            <!-- Tomorrow weather card starts here. -->
+            <div class="weather-card columns">
+                <div class="column is-5 icon-container">
+                    <img id="tomorrow-weather-icon" class="weather-icon" src="#" alt="Icon of the weather">
+                </div>
+                <div class="weather-card-info column is-7">
+                    <h2>Tomorrow</h2>
+                    <p id="tomorrow-high" class="temp"></p>
+                    <p id="tomorrow-low" class="temp"></p>
+                    <p id="tomorrow-humidity" class="humidity"></p>
+                    <p id="tomorrow-description" class="description"></p>
                 </div>
             </div>
             <!-- And ends here. -->
