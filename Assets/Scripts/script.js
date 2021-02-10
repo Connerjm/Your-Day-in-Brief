@@ -27,18 +27,16 @@ $(document).ready(function ()//Encouraged when using jQuery.
         APINewsCalls("breaking-news");
 
         //Prompts user for info if first time, otherwise grab from storage.
-        if (localStorage.getItem("userInfo"))
-        {
+        if (localStorage.getItem("userInfo")) {
             userInfoObj = JSON.parse(localStorage.getItem("userInfo"));
             $("#greeting").text(userInfoObj.userName);
         }
-        else
-        {
+        else {
             $("#modal").addClass("is-active");
         }
     }
     Initialize();
-console.log(userInfoObj.userCity);
+    console.log(userInfoObj.userZipCode);
     /* Helper Functions */
 
     //API calls for the given category.
@@ -81,9 +79,9 @@ console.log(userInfoObj.userCity);
     }
 
     function APITodayWeatherCalls(userInfoObj) {
-        var city = userInfoObj.userCity;
-        console.log(city);
-        var requesturl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${WEATHER_API_KEY}`;
+        var zipcode = userInfoObj.userZipCode;
+        console.log(zipcode);
+        var requesturl = `https://api.openweathermap.org/data/2.5/weather?zip=${zipcode}&units=imperial&appid=${WEATHER_API_KEY}`;
         $.ajax({
             url: requesturl,
             type: "GET",
@@ -112,13 +110,13 @@ console.log(userInfoObj.userCity);
                 //Convert global unix timestamps to local time: 8 hrs * 60 min * 60 sec * 1000 ms
                 var timestamp = $($(tempTimestamp - 8 * 60 * 60 * 1000));
                 timestamp = timestamp[0];
-                
+
                 var sunrise = $($(tempSunrise - 8 * 60 * 60 * 1000));
                 sunrise = sunrise[0];
-            
+
                 var sunset = $($(tempSunset - 8 * 60 * 60 * 1000));
                 sunset = sunset[0];
-                
+
                 //30 minutes before sunrise
                 var sunriseMinusThirty = $($(sunrise - 30 * 60 * 1000));
                 sunriseMinusThirty = sunriseMinusThirty[0];
@@ -159,9 +157,9 @@ console.log(userInfoObj.userCity);
     }
 
     function APITomorrowWeatherCalls() {
-        var city = userInfoObj.userCity;
-        var requesturl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=imperial&appid=${WEATHER_API_KEY}`;
-        
+        var zipcode = userInfoObj.userZipCode;
+        var requesturl = `https://api.openweathermap.org/data/2.5/forecast?zip=${zipcode}&units=imperial&appid=${WEATHER_API_KEY}`;
+
         $.ajax({
             url: requesturl,
             type: "GET",
@@ -180,7 +178,7 @@ console.log(userInfoObj.userCity);
                 $("#day1-low").html(`Low: ${response.list[11].main.temp_min}\xB0F`);
                 $("#day1-humidity").html(`Humidity: ${response.list[11].main.humidity}%`);
                 $("#day1-description").html(response.list[11].weather[0].description);
-                $("#day1-date").html((response.list[11].dt_txt).slice(0,10));
+                $("#day1-date").html((response.list[11].dt_txt).slice(0, 10));
                 var icon = response.list[11].weather[0].icon;
                 iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
                 $("#day1-weather-icon").attr('src', iconUrl);
@@ -190,7 +188,7 @@ console.log(userInfoObj.userCity);
                 $("#day2-low").html(`Low: ${response.list[18].main.temp_min}\xB0F`);
                 $("#day2-humidity").html(`Humidity: ${response.list[18].main.humidity}%`);
                 $("#day2-description").html(response.list[18].weather[0].description);
-                $("#day2-date").html((response.list[18].dt_txt).slice(0,10));
+                $("#day2-date").html((response.list[18].dt_txt).slice(0, 10));
                 var icon = response.list[18].weather[0].icon;
                 iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
                 $("#day2-weather-icon").attr('src', iconUrl);
@@ -200,7 +198,7 @@ console.log(userInfoObj.userCity);
                 $("#day3-low").html(`Low: ${response.list[26].main.temp_min}\xB0F`);
                 $("#day3-humidity").html(`Humidity: ${response.list[26].main.humidity}%`);
                 $("#day3-description").html(response.list[26].weather[0].description);
-                $("#day3-date").html((response.list[26].dt_txt).slice(0,10));
+                $("#day3-date").html((response.list[26].dt_txt).slice(0, 10));
                 var icon = response.list[26].weather[0].icon;
                 iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
                 $("#day3-weather-icon").attr('src', iconUrl);
@@ -242,7 +240,7 @@ console.log(userInfoObj.userCity);
         $("#modal").removeClass("is-active");
         userInfoObj = {
             userName: $("#name").val(),
-            userCity: $("#city").val()
+            userZipCode: $("#zip-code").val()
         };
         localStorage.setItem("userInfo", JSON.stringify(userInfoObj));
         $("#greeting").text(userInfoObj.userName);
