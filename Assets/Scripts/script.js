@@ -30,6 +30,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
         if (localStorage.getItem("userInfo"))
         {
             userInfoObj = JSON.parse(localStorage.getItem("userInfo"));
+            $("#greeting").text(userInfoObj.userName);
         }
         else
         {
@@ -188,6 +189,7 @@ $(document).ready(function ()//Encouraged when using jQuery.
             userZipCode: $("#zip-code").val()
         };
         localStorage.setItem("userInfo", JSON.stringify(userInfoObj));
+        $("#greeting").text(userInfoObj.userName);
     });
 
     //Tabs with the news categories.
