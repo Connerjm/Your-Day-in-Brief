@@ -34,13 +34,16 @@ $(document).ready(function ()//Encouraged when using jQuery.
         else {
             $("#modal").addClass("is-active");
         }
+
+        //Calls for the weather.
+        APITodayWeatherCalls();
+        APITomorrowWeatherCalls();
     }
-    Initialize();
-    console.log(userInfoObj.userZipCode);
+
     /* Helper Functions */
 
     //API calls for the given category.
-    //general, business, entertainment, health, science, sports, and technology.
+    //Breaking News (default), US News, World News, Business, Sports, Science, Entertainment, and Health.
     function APINewsCalls(category) {
         var requesturl = `https://gnews.io/api/v4/top-headlines?token=${NEWS_API_KEY}&lang=en&topic=${category}`;
 
@@ -48,10 +51,6 @@ $(document).ready(function ()//Encouraged when using jQuery.
             url: requesturl,
             type: "GET",
             success: function (response) {
-                //Do something with the response data.
-                console.log(requesturl);
-                console.log(response);
-
                 //Responses called when category tabs are clicked
                 $(".headline").text("\"" + response.articles[0].title + ".\"");
                 $(".publish-date").text("Published " + (response.articles[0].publishedAt).slice(0, 10));
@@ -78,18 +77,15 @@ $(document).ready(function ()//Encouraged when using jQuery.
         });
     }
 
-    function APITodayWeatherCalls(userInfoObj) {
+    function APITodayWeatherCalls() {
         var zipcode = userInfoObj.userZipCode;
-        console.log(zipcode);
         var requesturl = `https://api.openweathermap.org/data/2.5/weather?zip=${zipcode}&units=imperial&appid=${WEATHER_API_KEY}`;
+        
         $.ajax({
             url: requesturl,
             type: "GET",
             success: function (response) {
                 //Do something with the response data.
-                console.log(requesturl);
-                console.log(response);
-
                 $("#today-name").html(response.name);
                 $("#today-high").html(`High: ${response.main.temp_max}\xB0F`)
                 $("#today-low").html(`Low: ${response.main.temp_min}\xB0F`);
@@ -165,9 +161,6 @@ $(document).ready(function ()//Encouraged when using jQuery.
             type: "GET",
             success: function (response) {
                 //Do something with the response data.
-                console.log(requesturl);
-                console.log(response);
-
                 $("#tomorrow-high").html(`High: ${response.list[2].main.temp_max}\xB0F`);
                 $("#tomorrow-low").html(`Low: ${response.list[2].main.temp_min}\xB0F`);
                 $("#tomorrow-humidity").html(`Humidity: ${response.list[2].main.humidity}%`);
@@ -203,18 +196,6 @@ $(document).ready(function ()//Encouraged when using jQuery.
                 iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
                 $("#day3-weather-icon").attr('src', iconUrl);
 
-
-
-
-
-
-
-
-
-
-
-
-
                 //Weather icon
                 var icon = response.list[2].weather[0].icon;
                 iconUrl = `https://openweathermap.org/img/w/${icon}.png`;
@@ -233,6 +214,12 @@ $(document).ready(function ()//Encouraged when using jQuery.
     $("#cancel, .modal-background").on("click", function () {
         $("#modal").removeClass("is-active");
         $("#greeting").text("Person");
+        userInfoObj = {
+            userName: "Person",
+            userZipCode: "98103"
+        }
+        APITodayWeatherCalls();
+        APITomorrowWeatherCalls();
     });
 
     //Submit button in modal.
@@ -244,6 +231,8 @@ $(document).ready(function ()//Encouraged when using jQuery.
         };
         localStorage.setItem("userInfo", JSON.stringify(userInfoObj));
         $("#greeting").text(userInfoObj.userName);
+        APITodayWeatherCalls();
+        APITomorrowWeatherCalls();
     });
 
     //Tabs with the news categories.
@@ -257,11 +246,6 @@ $(document).ready(function ()//Encouraged when using jQuery.
     /* Function Calls */
 
     //Get the ball rolling.
-    // Initialize();
-
-    /* Testing */
-
-    APITodayWeatherCalls(userInfoObj);
-    APITomorrowWeatherCalls(userInfoObj);
+    Initialize();
 
 });

@@ -29,7 +29,8 @@ This application will allow users to access the latest news and weather for the 
 - JavaScript
   - jQuery 3.5.1
 - ~~Currents API~~
-- Mediastack API
+- ~~Mediastack API~~
+- Gnews API
 - Open Weather API
 - Luxon js
 
@@ -39,6 +40,12 @@ This application will allow users to access the latest news and weather for the 
 - [Deployment](https://connerjm.github.io/Your-Day-in-Brief/)
 
 ## Images
+
+Enter your information
+![Modal for input user info](Assets/Images/README_images/modal.png)
+
+Welcome to the future
+![Application showing the news and weather for the day](Assets/Images/README_images/main.png)
 
 ## Notes
 
