@@ -29,7 +29,8 @@ This application will allow users to access the latest news and weather for the 
 - JavaScript
   - jQuery 3.5.1
 - ~~Currents API~~
-- Mediastack API
+- ~~Mediastack API~~
+- Gnews API
 - Open Weather API
 - Luxon js
 
