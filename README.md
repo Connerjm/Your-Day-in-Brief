@@ -41,6 +41,12 @@ This application will allow users to access the latest news and weather for the 
 
 ## Images
 
+Enter your information
+![Modal for input user info](Assets/Images/README_images/modal.png)
+
+Welcome to the future
+![Application showing the news and weather for the day](Assets/Images/README_images/main.png)
+
 ## Notes
 
 ### Conventions We Should Follow-
