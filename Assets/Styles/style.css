@@ -85,19 +85,19 @@ hr {
 }
 
 .night {
-background-image: linear-gradient(black, rgb(12, 9, 53), rgb(23, 15, 66));
+background-image: linear-gradient(black, rgb(20, 18, 53), rgb(38, 28, 95));
 }
 
-.nautical-twilight {
-background-image: linear-gradient(rgb(23, 15, 66), rgb(44, 33, 102), rgb(70, 60, 131));
-}
-
-.civil-twilight {
-background-image: linear-gradient(rgb(70, 60, 131) ,rgb(131, 60, 131), rgb(230, 140, 56));
+.sunrise {
+background-image: linear-gradient(rgb(201, 150, 40), rgb(129, 92, 49), rgb(26, 20, 7));
 }
 
 .day {
-background-image: linear-gradient(rgb(103, 156, 226), rgb(212, 201, 136), rgb(145, 185, 218));
+    background-image: linear-gradient(rgb(103, 156, 226), rgb(212, 201, 136), rgb(145, 185, 218));
+    }
+
+.sunset {
+background-image: linear-gradient(rgb(70, 60, 131) ,rgb(131, 60, 131), rgb(230, 140, 56));
 }
 
 .icon-container {
